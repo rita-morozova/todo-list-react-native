@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
+import { StyleSheet, View, FlatList, SafeAreaView, Alert, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import Header from './components/Header';
 import Task from './components/Task';
 import AddTask from './components/AddTask';
@@ -14,11 +14,17 @@ export default function App() {
   )
 
   const addTask = (text) => {
-    setTasks(prevTasks => {
-      return [{task: text, id: uuidv4()}, ... prevTasks ]
-    })
+    if (!text) {
+      Alert.alert('No tasks?', 'Please add a task', { text: 'OK' })
+    } else {
+      setTasks(prevTasks => {
+        return [{task: text, id: uuidv4()}, ... prevTasks ]
+      })
+    }
   }
+
   return (
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
     <SafeAreaView style={styles.container}>
       <Header />
       <View style={styles.content}>
@@ -33,6 +39,7 @@ export default function App() {
         </View>
       </View>
     </SafeAreaView>
+    </TouchableWithoutFeedback>
   );
 }
 
