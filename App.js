@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, FlatList, SafeAreaView} from 'react-native';
 import Header from './components/Header'
+import Task from './components/Task'
 
 export default function App() {
   const [tasks, setTasks] = useState([
-    [
       {"task":"HTML I","done":true, "id": "1"},
       {"task":"CSS","done":true, "id": "2"},
       {"task":"Responsive design","done":true, "id": "3"},
       ]
-  ])
+  )
   return (
     <SafeAreaView style={styles.container}>
       <Header />
@@ -18,7 +18,7 @@ export default function App() {
         <FlatList
             data={tasks}
             renderItem={({ item }) => (
-              <Text>{item.task}</Text>
+              <Task item={item} />
             )}
           />
         </View>
